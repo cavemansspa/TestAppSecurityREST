@@ -2,19 +2,20 @@ This repo shows the step-by-step changes to configure a Grails "--profile=rest-a
 
 Using Grails 3.1.4
 
-Step 1) Create the app
+Step 1) Create the app [Inital commit](https://github.com/cavemansspa/TestAppSecurityREST/commit/5dcdc15da50d22cd854c0d5b95a2febdf9515fe9)
 ```
 $ grails create-app TestAppSecurityREST --profile=rest-api
 ```
 
-Step 2) Added dependencies to build.gradle
+Step 2) Added dependencies to build.gradle [Commit](https://github.com/cavemansspa/TestAppSecurityREST/commit/71c2869c0ed94b77d82cd3c3a1de98ce768a0313)
 
-Step 3) Run s2-quickstart
+Step 3) Run s2-quickstart [Commit](https://github.com/cavemansspa/TestAppSecurityREST/commit/c8adfe4abc595603c6519b2f4111716f80655c06)
 ```
 $ grails s2-quickstart com.testappsecurityrest User Role
 ```
 
 Step 4) Add filters [http://alvarosanchez.github.io/grails-spring-security-rest/latest/docs/#_plugin_configuration]
+[Commit](https://github.com/cavemansspa/TestAppSecurityREST/commit/1e1860379c431d85280efc8fca01e9d887f35dd3)
 
 Step 5) Run app and test: `grails run-app --port=8181`
 
@@ -50,7 +51,7 @@ $ curl -v -s -H "Content-Type: application/json" http://localhost:8181/applicati
 
  ```
 
- Step 6) Add users via Bootstrap.groovy -- from @jnunderwood
+ Step 6) Add users via Bootstrap.groovy -- from @jnunderwood [Commit](https://github.com/cavemansspa/TestAppSecurityREST/commit/b96ac816c5538640be74fda1fdaeadab458a0f95)
 
  Step 7) Restart and test `api/login` endpoint
 
@@ -82,7 +83,7 @@ $ curl -v -s -H "Content-Type: application/json" http://localhost:8181/applicati
 
  ```
 
- Step 8) Annotate endpoints
+ Step 8) Annotate endpoints [Commit](https://github.com/cavemansspa/TestAppSecurityREST/commit/acea45d24da0bb8de783c277bb09186978d2dc4a)
  ```
      @Secured(['ROLE_ADMIN', 'ROLE_USER'])
      def testSecureJSON() {
