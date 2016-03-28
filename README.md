@@ -81,3 +81,70 @@ $ curl -v -s -H "Content-Type: application/json" http://localhost:8181/applicati
  * Connection #0 to host localhost left intact
 
  ```
+
+ Step 8) Annotate endpoints
+ ```
+     @Secured(['ROLE_ADMIN', 'ROLE_USER'])
+     def testSecureJSON() {
+         def ret = [hello: 'world secure']
+         println 'in testJSecureSON ' + params
+         render ret as JSON
+     }
+ ```
+
+ Step 9) Test endpoints
+ ```
+ $ curl -v -s -H "Content-Type: application/json" -d '{"username": "guest", "password": "guest"}' http://localhost:8080/api/login
+ {"username":"guest","roles":["ROLE_USER"],"token_type":"Bearer","access_token":"eyJhbGciOiJIUzI1NiJ9.eyJwcmluY2lwYWwiOiJINHNJQUFBQUFBQUFBSlZTUFU4VVVSUzlNKzRHRFlrQ0NTWVcySWlkbVUydzNBbzJxNG1aZ0dIZEJoUEoyNW5MK09ETmU4UDdnTjNHYktVRkJVUWxNZkV2OEUrZzRRY1FMV3lwYmJsdldKaUZodkNxbWZ2T25IUHVPWE4wRG5XajRYV21HUmNtS29UTHVJeE1vYm5NRENaT2N6dUluRUdkb2kwUmIwdGdseVp3ZVlJUWdoaENubHFZaVRmWkRtc0lKclBHU204VEU5dnNhMWhRT2hzeGJtaVc0NjdTVzlFMWQ2STAzaENvcUlPREVDYldZSm9saVhMU0xpdlo3aGRjWTdvR1U5VXNWc21XSDgwbWRJUFNjaWJNT0hRQ0plc0pUR09ZWk01K1ZxVEswVmg0Y21uV1dTNGFIYlROR0I0V3pCaHlkMnVUanZYV1wvYjIzS1dtRGJmZ0N0WDRSMEtIc1hucG81SG1pbGhLQ3R1Wkttdm11ekZYS043Z1hKXC83aDNQZlRcL2RcL0RiZ2hBbWJ5Nis1dHFcL213SmhzZWZcL2o4dmd3NFNDMFwvSHJGZXdacjhnTjlNVjh3ZU5Ydm5zMVwvc2ZoK2ZmUGo0Z1pZOTRjXC84KzVoZEh5UTFhS2krWVpsYU5kVVMwdXpYXC9UT1JMZDVOZnRUQ0lPand2Qk5JZkpTMm0xeElWTWExYjAwcGM1VzNoMGVwSzNGN3ZkdHFyXC9xMmVPU3FTUkIrWE9cL3V5b2xoUlZYdlwvRGs3MlhcL3doZ25kUTMySENJVVUrVllHV1hkNURcL2ZYb2NHN3k1OSs5Y29IUnp4eGVBSHFtU0pJUUF3QUEiLCJzdWIiOiJndWVzdCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE0NTkxOTgxNDYsImlhdCI6MTQ1OTE5NDU0Nn0.okr3Ve-jTOqyrxppPqFCDVOmnyeppxTlmBOgA5T6rZA","expires_in":3600,"refresh_token":"eyJhbGciOiJIUzI1NiJ9.eyJwcmluY2lwYWwiOiJINHNJQUFBQUFBQUFBSlZTUFU4VVVSUzlNKzRHRFlrQ0NTWVcySWlkbVUydzNBbzJxNG1aZ0dIZEJoUEoyNW5MK09ETmU4UDdnTjNHYktVRkJVUWxNZkV2OEUrZzRRY1FMV3lwYmJsdldKaUZodkNxbWZ2T25IUHVPWE4wRG5XajRYV21HUmNtS29UTHVJeE1vYm5NRENaT2N6dUluRUdkb2kwUmIwdGdseVp3ZVlJUWdoaENubHFZaVRmWkRtc0lKclBHU204VEU5dnNhMWhRT2hzeGJtaVc0NjdTVzlFMWQ2STAzaENvcUlPREVDYldZSm9saVhMU0xpdlo3aGRjWTdvR1U5VXNWc21XSDgwbWRJUFNjaWJNT0hRQ0plc0pUR09ZWk01K1ZxVEswVmg0Y21uV1dTNGFIYlROR0I0V3pCaHlkMnVUanZYV1wvYjIzS1dtRGJmZ0N0WDRSMEtIc1hucG81SG1pbGhLQ3R1Wkttdm11ekZYS043Z1hKXC83aDNQZlRcL2RcL0RiZ2hBbWJ5Nis1dHFcL213SmhzZWZcL2o4dmd3NFNDMFwvSHJGZXdacjhnTjlNVjh3ZU5Ydm5zMVwvc2ZoK2ZmUGo0Z1pZOTRjXC84KzVoZEh5UTFhS2krWVpsYU5kVVMwdXpYXC9UT1JMZDVOZnRUQ0lPand2Qk5JZkpTMm0xeElWTWExYjAwcGM1VzNoMGVwSzNGN3ZkdHFyXC9xMmVPU3FTUkIrWE9cL3V5b2xoUlZYdlwvRGs3MlhcL3doZ25kUTMySENJVVUrVllHV1hkNURcL2ZYb2NHN3k1OSs5Y29IUnp4eGVBSHFtU0pJUUF3QUEiLCJzdWIiOiJndWVzdCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJpYXQiOjE0NTkxOTQ1NDZ9.JBXn9Meipc6wVxl-jFygCfkGv3yrMVJQihtUAwToPPI"}* timeout on name lookup is not supported
+ *   Trying ::1...
+ * Connected to localhost (::1) port 8080 (#0)
+ > POST /api/login HTTP/1.1
+ > Host: localhost:8080
+ > User-Agent: curl/7.47.1
+ > Accept: */*
+ > Content-Type: application/json
+ > Content-Length: 42
+ >
+ } [42 bytes data]
+ * upload completely sent off: 42 out of 42 bytes
+ < HTTP/1.1 200 OK
+ < Server: Apache-Coyote/1.1
+ < Cache-Control: no-store
+ < Pragma: no-cache
+ < Content-Type: application/json;charset=UTF-8
+ < Content-Length: 2160
+ < Date: Mon, 28 Mar 2016 19:49:06 GMT
+ <
+ { [2160 bytes data]
+ * Connection #0 to host localhost left intact
+
+
+ ```
+
+ Use the access_token on your requests.
+ ```
+ $ curl -v -H "Content-Type: application/json" -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJwcmluY2lwYWwiOiJINHNJQUFBQUFBQUFBSlZTUFU4VVVSUzlNKzRHRFlrQ0NTWVcySWlkbVUydzNBbzJxNG1aZ0dIZEJoUEoyNW5MK09ETmU4UDdnTjNHYktVRkJVUWxNZkV2OEUrZzRRY1FMV3lwYmJsdldKaUZodkNxbWZ2T25IUHVPWE4wRG5XajRYV21HUmNtS29UTHVJeE1vYm5NRENaT2N6dUluRUdkb2kwUmIwdGdseVp3ZVlJUWdoaENubHFZaVRmWkRtc0lKclBHU204VEU5dnNhMWhRT2hzeGJtaVc0NjdTVzlFMWQ2STAzaENvcUlPREVDYldZSm9saVhMU0xpdlo3aGRjWTdvR1U5VXNWc21XSDgwbWRJUFNjaWJNT0hRQ0plc0pUR09ZWk01K1ZxVEswVmg0Y21uV1dTNGFIYlROR0I0V3pCaHlkMnVUanZYV1wvYjIzS1dtRGJmZ0N0WDRSMEtIc1hucG81SG1pbGhLQ3R1Wkttdm11ekZYS043Z1hKXC83aDNQZlRcL2RcL0RiZ2hBbWJ5Nis1dHFcL213SmhzZWZcL2o4dmd3NFNDMFwvSHJGZXdacjhnTjlNVjh3ZU5Ydm5zMVwvc2ZoK2ZmUGo0Z1pZOTRjXC84KzVoZEh5UTFhS2krWVpsYU5kVVMwdXpYXC9UT1JMZDVOZnRUQ0lPand2Qk5JZkpTMm0xeElWTWExYjAwcGM1VzNoMGVwSzNGN3ZkdHFyXC9xMmVPU3FTUkIrWE9cL3V5b2xoUlZYdlwvRGs3MlhcL3doZ25kUTMySENJVVUrVllHV1hkNURcL2ZYb2NHN3k1OSs5Y29IUnp4eGVBSHFtU0pJUUF3QUEiLCJzdWIiOiJndWVzdCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE0NTkxOTgxNDYsImlhdCI6MTQ1OTE5NDU0Nn0.okr3Ve-jTOqyrxppPqFCDVOmnyeppxTlmBOgA5T6rZA'  http://localhost:8181/application/testSecureJSON
+ * timeout on name lookup is not supported
+ *   Trying ::1...
+   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                  Dload  Upload   Total   Spent    Left  Speed
+   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Connected to localhost (::1) port 8181 (#0)
+ > GET /application/testSecureJSON HTTP/1.1
+ > Host: localhost:8181
+ > User-Agent: curl/7.47.1
+ > Accept: */*
+ > Content-Type: application/json
+ > Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJwcmluY2lwYWwiOiJINHNJQUFBQUFBQUFBSlZTUFU4VVVSUzlNKzRHRFlrQ0NTWVcySWlkbVUydzNBbzJxNG1aZ0dIZEJoUEoyNW5MK09ETmU4UDdnTjNHYktVRkJVUWxNZkV2OEUrZzRRY1FMV3lwYmJsdldKaUZodkNxbWZ2T25IUHVPWE4wRG5XajRYV21HUmNtS29UTHVJeE1vYm5NRENaT2N6dUluRUdkb2kwUmIwdGdseVp3ZVlJUWdoaENubHFZaVRmWkRtc0lKclBHU204VEU5dnNhMWhRT2hzeGJtaVc0NjdTVzlFMWQ2STAzaENvcUlPREVDYldZSm9saVhMU0xpdlo3aGRjWTdvR1U5VXNWc21XSDgwbWRJUFNjaWJNT0hRQ0plc0pUR09ZWk01K1ZxVEswVmg0Y21uV1dTNGFIYlROR0I0V3pCaHlkMnVUanZYV1wvYjIzS1dtRGJmZ0N0WDRSMEtIc1hucG81SG1pbGhLQ3R1Wkttdm11ekZYS043Z1hKXC83aDNQZlRcL2RcL0RiZ2hBbWJ5Nis1dHFcL213SmhzZWZcL2o4dmd3NFNDMFwvSHJGZXdacjhnTjlNVjh3ZU5Ydm5zMVwvc2ZoK2ZmUGo0Z1pZOTRjXC84KzVoZEh5UTFhS2krWVpsYU5kVVMwdXpYXC9UT1JMZDVOZnRUQ0lPand2Qk5JZkpTMm0xeElWTWExYjAwcGM1VzNoMGVwSzNGN3ZkdHFyXC9xMmVPU3FTUkIrWE9cL3V5b2xoUlZYdlwvRGs3MlhcL3doZ25kUTMySENJVVUrVllHV1hkNURcL2ZYb2NHN3k1OSs5Y29IUnp4eGVBSHFtU0pJUUF3QUEiLCJzdWIiOiJndWVzdCIsInJvbGVzIjpbIlJPTEVfVVNFUiJdLCJleHAiOjE0NTkxOTgxNDYsImlhdCI6MTQ1OTE5NDU0Nn0.okr3Ve-jTOqyrxppPqFCDVOmnyeppxTlmBOgA5T6rZA
+ >
+ < HTTP/1.1 200 OK
+ < Server: Apache-Coyote/1.1
+ < X-Application-Context: application:development:8181
+ < Content-Type: application/json;charset=UTF-8
+ < Transfer-Encoding: chunked
+ < Date: Mon, 28 Mar 2016 20:09:31 GMT
+ <
+ { [35 bytes data]
+ 100    24    0    24    0     0   1600      0 --:--:-- --:--:-- --:--:--  1600{"hello":"world secure"}
+ * Connection #0 to host localhost left intact
+
+ ```
